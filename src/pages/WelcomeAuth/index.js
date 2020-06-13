@@ -3,13 +3,16 @@ import { View, Text } from 'react-native';
 import ActionButton from './ActionButton';
 import { colors } from '../../utils';
 
-const WelcomeAuth = () => {
+const WelcomeAuth = ({navigation}) => {
+    const handleGoTo = (screen) => {
+        navigation.navigate(screen)
+    }
     return (
         <View style={styles.wrapper.page}>
             <View style={styles.wrapper.illustration}></View>
             <Text style={styles.text.welcome}>Selamat Datang di Ojol App</Text>
-            <ActionButton desc="Silahkan Masuk,Jika anda sudah memiliki akun" title="Masuk"/>
-            <ActionButton desc="atau Silahkan Daftar,Jika anda belum memiliki akun" title="Daftar"/>
+            <ActionButton desc="Silahkan Masuk,Jika anda sudah memiliki akun" title="Masuk" onPress={() => handleGoTo('Login')}/>
+            <ActionButton desc="atau Silahkan Daftar,Jika anda belum memiliki akun" title="Daftar" onPress={() => handleGoTo('Register')}/>
         </View>
     );
 };
