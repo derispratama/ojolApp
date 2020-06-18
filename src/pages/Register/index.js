@@ -1,20 +1,40 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { Input } from '../../components';
+import React, {useState} from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { Input, Button } from '../../components';
 import { colors } from '../../utils';
 
 const Register = () => {
+    const [form, setForm] = useState({
+        fullname: '',
+        email: '',
+        password: ''
+    })
+
+    const sendData = () => {
+        console.log('data yang dikirim ', form)
+    }
+
+    const onInputChange = (value,input) => {
+        setForm({
+            ...form,
+            [input]: value,
+        });
+    }
     return (
         <View style={styles.wrapper.pages}>
-            <View style={styles.iconBack}></View>
-            <View style={styles.illutration}></View>
-            <Text style={styles.text.desc}> Mohon isi beberapa data untuk proses daftar anda</Text>
-            <View style={styles.space(64)}/>
-            <Input placeholder="nama lengkap"/>
-            <View style={styles.space(33)}/>
-            <Input placeholder="email"/>
-            <View style={styles.space(33)}/>
-            <Input placeholder="password"/>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={styles.iconBack}></View>
+                <View style={styles.illutration}></View>
+                <Text style={styles.text.desc}> Mohon isi beberapa data untuk proses daftar anda</Text>
+                <View style={styles.space(64)}/>
+                <Input placeholder="nama lengkap" value={form.fullname} onChangeText={(value) => onInputChange(value,'fullname')}/>
+                <View style={styles.space(33)} />
+                <Input placeholder="email" value={form.email} onChangeText={(value) => onInputChange(value,'email')}/>
+                <View style={styles.space(33)} />
+                <Input placeholder="password" value={form.password} onChangeText={(value) => onInputChange(value, 'password')} secureTextEntry={true}/>
+                <View style={styles.space(83)}/>
+                <Button title="Daftar" onPress={sendData}/>
+            </ScrollView>
         </View>
     );
 };
